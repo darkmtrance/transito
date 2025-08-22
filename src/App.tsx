@@ -75,7 +75,7 @@ function App() {
     const sessionInfo = getSessionInfo();
 
     // Enviar consulta al webhook
-    fetch('https://n8n.matomaylla.com/webhook-test/b41cc15f-f9f0-44b8-9eeb-1b4840c50d4a', {
+    fetch('https://n8n.matomaylla.com/webhook/b41cc15f-f9f0-44b8-9eeb-1b4840c50d4a', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -227,7 +227,11 @@ function App() {
                   <div className="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg">
                     <h4 className="font-bold text-green-800 mb-2">Respuesta:</h4>
                     <div className="text-green-700 text-sm">
-                      {typeof webhookResponse === 'object' ? (
+                      {typeof webhookResponse === 'object' && webhookResponse.output ? (
+                        <div className="space-y-2">
+                          <p>{String(webhookResponse.output)}</p>
+                        </div>
+                      ) : typeof webhookResponse === 'object' ? (
                         <div className="space-y-2">
                           {Object.entries(webhookResponse).map(([key, value]) => (
                             <div key={key}>
@@ -493,7 +497,11 @@ function App() {
                 <div className="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg">
                   <h4 className="font-bold text-green-800 mb-2">Respuesta:</h4>
                   <div className="text-green-700 text-sm">
-                    {typeof webhookResponse === 'object' ? (
+                    {typeof webhookResponse === 'object' && webhookResponse.output ? (
+                      <div className="space-y-2">
+                        <p>{String(webhookResponse.output)}</p>
+                      </div>
+                    ) : typeof webhookResponse === 'object' ? (
                       <div className="space-y-2">
                         {Object.entries(webhookResponse).map(([key, value]) => (
                           <div key={key}>
